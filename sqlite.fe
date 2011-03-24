@@ -18,8 +18,34 @@ if(res == null) {
 }
 */
 
+/* does not work
 res = dbh.query("INSERT INTO testtable (testrecord1, testrecord2)" +
-    " VALUES (?, ?)", "string %' '", 'zxcvqwer');
+    " VALUES (" + "'string %\' \''" + ", 'zxcvqwer')");
+if(res == null) {
+    Console.println("Error inserting: " + dbh.errstr());	 
+    Sys.exit(1);
+}
+
+// same results
+res = dbh.query("INSERT INTO testtable (testrecord1, testrecord2)" +
+    " VALUES (" + dbh.quote("string %' '") + ", 'zxcvqwer')");
+if(res == null) {
+    Console.println("Error inserting: " + dbh.errstr());	 
+    Sys.exit(1);
+}
+*/
+
+// this way 
+res = dbh.query("INSERT INTO testtable (testrecord1, testrecord2)" +
+    " VALUES (\"string1 %' '\", 'zxcvqwer')");
+if(res == null) {
+    Console.println("Error inserting: " + dbh.errstr());	 
+    Sys.exit(1);
+}
+
+// or this way is ok
+res = dbh.query("INSERT INTO testtable (testrecord1, testrecord2)" +
+    " VALUES (" + "\"string2 %' '\"" + ", 'zxcvqwer')");
 if(res == null) {
     Console.println("Error inserting: " + dbh.errstr());	 
     Sys.exit(1);
