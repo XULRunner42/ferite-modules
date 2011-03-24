@@ -28,6 +28,7 @@
  */
 
 #include "utility.h"
+#include <stdio.h>
 
 
 DBIData *ferite_dbi_connect_sq3( FeriteScript *script, FeriteString *protocol,
@@ -169,14 +170,18 @@ char *ferite_quote_internal( char *str )
 {
     char *new = NULL, *orig = NULL, *dest = NULL, *end = NULL, c;
     int  len = strlen( str );
+
+    printf("opening: %s\n", str);
     new = fmalloc_ngc( ( len * 2 ) + 1 ); 
     
     for ( orig = str, end = (orig + len), dest = new; ( c = *orig ) || orig < end; orig++ ) {
-		if (c == '\'' || c == '\\' || c == '"')  
-			*dest++ = '\\';
+		if (c == '\'' || c == '\\' || c == '"')  {
+			printf("found %c\n", c);
+			*dest++ = '\\'; }
 		*dest++ = c;
     }
     *dest = '\0'; 
+    printf("quoted: %s\n", new);
     return new;
 }
 
