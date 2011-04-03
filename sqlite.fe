@@ -10,13 +10,13 @@ if (dbh == null) {
     Sys.exit(1);	
 }
 
-/*res = dbh.query("CREATE TABLE IF NOT EXISTS testtable (testrecord1 CLOB," +
+res = dbh.query("CREATE TABLE IF NOT EXISTS testtable (testrecord1 CLOB," +
     "testrecord2 VARCHAR(8))");
 if(res == null) {
     Console.println("Error creating: " + dbh.errstr());	 
     Sys.exit(1);
 }
-*/
+
 
 /* does not work
 res = dbh.query("INSERT INTO testtable (testrecord1, testrecord2)" +
